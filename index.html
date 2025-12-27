@@ -79,27 +79,44 @@
   <div id="text"></div>
 
   <script>
-    let size = 20;
-    const texts = [
-      "Are you sure? 🥺",
-      "Pookie please… 🙏",
-      "If you say no, I’ll be sad…",
-      "I’ll be very very sad 😔",
-      "Last chance 😢"
-    ];
-    let i = 0;
+  let clickCount = 0;
 
-    function makeYesBigger() {
-      size += 10;
-      document.getElementById("yesBtn").style.fontSize = size + "px";
-      document.getElementById("text").innerText = texts[i % texts.length];
-      i++;
-    }
+  const texts = [
+    "Are you sure? 🥺",
+    "Pookie please… 🙏",
+    "If you say no, I’ll be sad…",
+    "I’ll be very very sad 😔",
+    "Okay… last chance 😢"
+  ];
 
-    function goIG() {
-      window.location.href = "https://instagram.com/keysssssssssssssss";
+  function makeYesBigger() {
+    clickCount++;
+
+    const yesBtn = document.getElementById("yesBtn");
+    const text = document.getElementById("text");
+
+    text.innerText = texts[clickCount - 1] || "";
+
+    if (clickCount < 5) {
+      yesBtn.style.fontSize = (20 + clickCount * 12) + "px";
+      yesBtn.style.padding = (15 + clickCount * 8) + "px";
+    } else {
+      // CLICK KE-5 → YES FULL SCREEN
+      yesBtn.style.position = "fixed";
+      yesBtn.style.top = "0";
+      yesBtn.style.left = "0";
+      yesBtn.style.width = "100vw";
+      yesBtn.style.height = "100vh";
+      yesBtn.style.fontSize = "80px";
+      yesBtn.style.borderRadius = "0";
+      yesBtn.innerText = "YES 💚";
     }
-  </script>
+  }
+
+  function goIG() {
+    window.location.href = "https://instagram.com/keysssssssssssssss";
+  }
+</script>
 
 </body>
 </html>
