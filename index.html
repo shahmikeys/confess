@@ -86,30 +86,27 @@
     "Pookie please… 🙏",
     "If you say no, I’ll be sad…",
     "I’ll be very very sad 😔",
-    "Okay… last chance 😢"
+    "Okay… I give up 😢"
   ];
 
   function makeYesBigger() {
     clickCount++;
 
     const yesBtn = document.getElementById("yesBtn");
-    const text = document.getElementById("text");
+    const noBtn  = document.getElementById("noBtn");
+    const text   = document.getElementById("text");
 
+    // tukar ayat pujuk
     text.innerText = texts[clickCount - 1] || "";
 
-    if (clickCount < 5) {
-      yesBtn.style.fontSize = (20 + clickCount * 12) + "px";
-      yesBtn.style.padding = (15 + clickCount * 8) + "px";
-    } else {
-      // CLICK KE-5 → YES FULL SCREEN
-      yesBtn.style.position = "fixed";
-      yesBtn.style.top = "0";
-      yesBtn.style.left = "0";
-      yesBtn.style.width = "100vw";
-      yesBtn.style.height = "100vh";
-      yesBtn.style.fontSize = "80px";
-      yesBtn.style.borderRadius = "0";
-      yesBtn.innerText = "YES 💚";
+    // YES makin besar sikit-sikit
+    yesBtn.style.fontSize = (20 + clickCount * 8) + "px";
+    yesBtn.style.padding = (15 + clickCount * 6) + "px";
+
+    // klik ke-5 → NO hilang
+    if (clickCount >= 5) {
+      noBtn.style.display = "none";
+      text.innerText = "Okay… now only YES left 🤍";
     }
   }
 
