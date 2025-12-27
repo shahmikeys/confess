@@ -4,103 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For You 🤍</title>
+
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #fce3ec, #ffe8d6);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin: 0;
-    }
-
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 360px;
+      height: 100vh;
+      background: #ffe4ea;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      animation: fadeIn 1s ease;
     }
 
     h1 {
-      color: #ff5e78;
+      color: #c0392b;
+      margin-bottom: 20px;
     }
 
-    p {
-      color: #444;
-      font-size: 16px;
-      line-height: 1.6;
+    img {
+      width: 180px;
+      margin: 20px 0;
     }
 
-    button {
-      margin: 10px;
-      padding: 12px 20px;
-      border-radius: 25px;
+    .buttons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    #yesBtn {
+      background: #4CAF50;
+      color: white;
+      font-size: 20px;
+      padding: 15px 30px;
       border: none;
-      font-size: 15px;
+      border-radius: 10px;
       cursor: pointer;
       transition: 0.3s;
     }
 
-    .yes {
-      background: #ff5e78;
+    #noBtn {
+      background: #e74c3c;
       color: white;
+      font-size: 14px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
-    .maybe {
-      background: #ddd;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .ig {
-      margin-top: 20px;
-      font-weight: bold;
-      color: #ff5e78;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    #text {
+      margin-top: 15px;
+      color: #e74c3c;
+      font-size: 14px;
+      height: 20px;
     }
   </style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Hey You 🤍</h1>
-    <p>
-      I’ve been wanting to say this for a while.<br><br>
-      I like you — honestly and sincerely.  
-      No pressure, no expectations.  
-      Just wanted you to know.
-    </p>
+  <h1>Will you be my Valentine? 🤍</h1>
 
-    <p>Is it okay if we get to know each other better?</p>
+  <!-- GIF / gambar (boleh tukar link) -->
+  <img src="https://media.tenor.com/zGm5acSjHCIAAAAC/cat-cute.gif" alt="cute cat">
 
-    <button class="yes" onclick="openIG()">Yes 😊</button>
-    <button class="maybe" onclick="alert('just say yes😔😡')">Maybe</button>
-
-    <div id="ig" class="hidden ig">
-      If you’re comfortable, can I have your Instagram?  
-      <br>👉 <em>(You can reply me there)</em>
-    </div>
+  <div class="buttons">
+    <button id="yesBtn" onclick="goIG()">Yes</button>
+    <button id="noBtn" onclick="makeYesBigger()">No</button>
   </div>
 
+  <div id="text"></div>
+
   <script>
-  function openIG() {
-    window.open("https://instagram.com/keysssssssssssssss", "_blank");
-  }
-</script>
+    let size = 20;
+    const texts = [
+      "Are you sure? 🥺",
+      "Pookie please… 🙏",
+      "If you say no, I’ll be sad…",
+      "I’ll be very very sad 😔",
+      "Last chance 😢"
+    ];
+    let i = 0;
+
+    function makeYesBigger() {
+      size += 10;
+      document.getElementById("yesBtn").style.fontSize = size + "px";
+      document.getElementById("text").innerText = texts[i % texts.length];
+      i++;
+    }
+
+    function goIG() {
+      window.location.href = "https://instagram.com/keysssssssssssssss";
+    }
+  </script>
 
 </body>
 </html>
