@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You 🤍</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #fce3ec, #ffe8d6);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      color: #ff5e78;
+    }
+
+    p {
+      color: #444;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 25px;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background: #ff5e78;
+      color: white;
+    }
+
+    .maybe {
+      background: #ddd;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .ig {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff5e78;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey You 🤍</h1>
+    <p>
+      I’ve been wanting to say this for a while.<br><br>
+      I like you — honestly and sincerely.  
+      No pressure, no expectations.  
+      Just wanted you to know.
+    </p>
+
+    <p>Is it okay if we get to know each other better?</p>
+
+    <button class="yes" onclick="showIG()">Yes 😊</button>
+    <button class="maybe" onclick="alert('It’s okay, thank you for being honest 🤍')">Maybe</button>
+
+    <div id="ig" class="hidden ig">
+      If you’re comfortable, can I have your Instagram?  
+      <br>👉 <em>(You can reply me there)</em>
+    </div>
+  </div>
+
+  <script>
+    function showIG() {
+      document.getElementById("ig").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
