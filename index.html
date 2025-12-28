@@ -1,140 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Love</title>
 
 <style>
-  * {
-    box-sizing: border-box;
-    font-family: "MS Sans Serif", Arial, sans-serif;
-  }
+*{
+  box-sizing:border-box;
+  font-family:"MS Sans Serif", Arial, sans-serif;
+}
 
-  body {
-    margin: 0;
-    height: 100vh;
-    background: #008080;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
+body{
+  margin:0;
+  height:100vh;
+  background:#008080;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
 
-  /* sticker */
-  .sticker {
-    position: absolute;
-    width: 80px;
-    animation: popSticker 0.4s ease;
-    pointer-events: none;
-  }
+/* STICKER */
+#sticker{
+  position:absolute;
+  width:90px;
+  pointer-events:none;
+  animation:popSticker .4s ease;
+}
 
-  @keyframes popSticker {
-    from { transform: scale(0.5) rotate(-10deg); opacity: 0; }
-    to { transform: scale(1) rotate(0); opacity: 1; }
-  }
+@keyframes popSticker{
+  from{transform:scale(.5) rotate(-15deg);opacity:0}
+  to{transform:scale(1) rotate(0);opacity:1}
+}
 
-  .window {
-    width: 340px;
-    background: #c0c0c0;
-    border: 3px solid #000;
-    box-shadow: 4px 4px 0 #404040;
-    animation: pop 0.4s ease;
-    position: relative;
-    z-index: 2;
-  }
+/* WINDOW */
+.window{
+  width:340px;
+  background:#c0c0c0;
+  border:3px solid #000;
+  box-shadow:4px 4px 0 #404040;
+  animation:pop .4s ease;
+  z-index:2;
+}
 
-  @keyframes pop {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+@keyframes pop{
+  from{transform:scale(.9);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
 
-  .titlebar {
-    background: linear-gradient(to right, #000080, #0000cd);
-    color: white;
-    padding: 6px;
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.titlebar{
+  background:linear-gradient(to right,#000080,#0000cd);
+  color:#fff;
+  padding:6px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-  .close {
-    background: #c0c0c0;
-    border: 1px solid #000;
-    width: 18px;
-    height: 18px;
-    text-align: center;
-    line-height: 16px;
-  }
+.close{
+  width:18px;
+  height:18px;
+  background:#c0c0c0;
+  border:1px solid #000;
+  text-align:center;
+  line-height:16px;
+}
 
-  .content {
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-  }
+.content{
+  padding:20px;
+  text-align:center;
+  font-size:14px;
+}
 
-  .buttons {
-    margin-top: 20px;
-    position: relative;
-    height: 50px;
-  }
+.buttons{
+  margin-top:20px;
+  position:relative;
+  height:55px;
+}
 
-  button {
-    background: #e0e0e0;
-    border: 2px solid #000;
-    padding: 6px 20px;
-    cursor: pointer;
-    position: absolute;
-    transition: all 0.3s ease;
-  }
+button{
+  background:#e0e0e0;
+  border:2px solid #000;
+  padding:6px 20px;
+  cursor:pointer;
+  position:absolute;
+  transition:.3s ease;
+}
 
-  button:active {
-    transform: translate(2px, 2px);
-  }
+button:active{
+  transform:translate(2px,2px);
+}
 
-  #yesBtn {
-    left: 50px;
-    z-index: 2;
-  }
+#yesBtn{left:50px;z-index:2}
+#noBtn{right:50px;z-index:1}
 
-  #noBtn {
-    right: 50px;
-    z-index: 1;
-  }
+.hidden{display:none}
 
-  .hidden {
-    display: none;
-  }
+/* ICONS */
+.icons{
+  display:flex;
+  justify-content:space-around;
+  margin-top:20px;
+}
 
-  /* icons */
-  .icons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
+.icons img{
+  width:50px;
+  cursor:pointer;
+  image-rendering:pixelated;
+  transition:.2s;
+}
 
-  .icons img {
-    width: 48px;
-    cursor: pointer;
-    image-rendering: pixelated;
-    transition: transform 0.2s;
-  }
-
-  .icons img:hover {
-    transform: scale(1.15);
-  }
+.icons img:hover{
+  transform:scale(1.15);
+}
 </style>
 </head>
 
 <body>
 
-<!-- DYNAMIC STICKER -->
-<img id="sticker" class="sticker"
-     src="https://media.tenor.com/zGm5acSjHCIAAAAC/cat-cute.gif"
-     style="top:10%; left:10%;">
+<!-- STICKER -->
+<img id="sticker" src="https://media.tenor.com/9RZ8Z1ZPzSIAAAAi/bear-love.gif"
+style="top:10%;left:10%;">
 
-<!-- MAIN WINDOW -->
+<!-- AUDIO -->
+<audio id="err" src="https://www.myinstants.com/media/sounds/windows-error.mp3"></audio>
+<audio id="click" src="https://www.myinstants.com/media/sounds/windows-click.mp3"></audio>
+
+<!-- MAIN -->
 <div class="window" id="main">
   <div class="titlebar">
     <span>Message</span>
@@ -170,54 +163,45 @@
 </div>
 
 <script>
-  let noCount = 0;
+let noCount=0;
 
-  const stickers = [
-    "https://media.tenor.com/zGm5acSjHCIAAAAC/cat-cute.gif",
-    "https://media.tenor.com/1UjXKj1p8sUAAAAi/heart-love.gif",
-    "https://media.tenor.com/9RZ8Z1ZPzSIAAAAi/bear-love.gif",
-    "https://media.tenor.com/L0bK0c7s0o0AAAAi/cute-pixel.gif",
-    "https://media.tenor.com/0AVbKGY_MxMAAAAi/crying-cat.gif"
-  ];
+const sadStickers=[
+  "https://media.tenor.com/zGm5acSjHCIAAAAC/cat-cute.gif",
+  "https://media.tenor.com/0AVbKGY_MxMAAAAi/crying-cat.gif",
+  "https://media.tenor.com/1UjXKj1p8sUAAAAi/heart-love.gif"
+];
 
-  function noClick() {
-    noCount++;
+function noClick(){
+  noCount++;
+  document.getElementById("err").play();
 
-    const yes = document.getElementById("yesBtn");
-    const no = document.getElementById("noBtn");
-    const sticker = document.getElementById("sticker");
+  const yes=document.getElementById("yesBtn");
+  const no=document.getElementById("noBtn");
+  const s=document.getElementById("sticker");
 
-    // YES membesar
-    yes.style.transform = `scale(${1 + noCount * 0.35})`;
-    yes.style.left = "120px";
+  yes.style.transform=`scale(${1+noCount*.35})`;
+  yes.style.left="120px";
 
-    // NO makin hilang
-    if (noCount >= 3) {
-      no.style.opacity = "0";
-    }
+  if(noCount>=3) no.style.opacity="0";
 
-    // tukar sticker
-    sticker.src = stickers[noCount % stickers.length];
+  s.src=sadStickers[noCount%sadStickers.length];
+  s.style.top=Math.random()*60+"%";
+  s.style.left=Math.random()*60+"%";
+  s.style.animation="none";
+  s.offsetHeight;
+  s.style.animation="popSticker .4s ease";
+}
 
-    // random position
-    sticker.style.top = Math.random() * 60 + "%";
-    sticker.style.left = Math.random() * 60 + "%";
+function yesClick(){
+  document.getElementById("click").play();
+  document.getElementById("sticker").src="https://media.tenor.com/9RZ8Z1ZPzSIAAAAi/bear-love.gif";
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+}
 
-    // restart animation
-    sticker.style.animation = "none";
-    sticker.offsetHeight;
-    sticker.style.animation = "popSticker 0.4s ease";
-  }
-
-  function yesClick() {
-    document.getElementById("main").classList.add("hidden");
-    document.getElementById("final").classList.remove("hidden");
-    document.getElementById("sticker").style.display = "none";
-  }
-
-  function openLink(url) {
-    window.location.href = url;
-  }
+function openLink(url){
+  window.location.href=url;
+}
 </script>
 
 </body>
