@@ -18,6 +18,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+  }
+
+  /* floating stickers */
+  .sticker {
+    position: absolute;
+    width: 60px;
+    animation: float 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .s1 { top: 8%; left: 10%; }
+  .s2 { top: 15%; right: 12%; animation-delay: 1s; }
+  .s3 { bottom: 12%; left: 14%; animation-delay: 2s; }
+  .s4 { bottom: 15%; right: 10%; animation-delay: 3s; }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
   }
 
   .window {
@@ -26,6 +46,8 @@
     border: 3px solid #000;
     box-shadow: 4px 4px 0 #404040;
     animation: pop 0.4s ease;
+    position: relative;
+    z-index: 2;
   }
 
   @keyframes pop {
@@ -113,6 +135,12 @@
 
 <body>
 
+<!-- STICKERS -->
+<img class="sticker s1" src="https://media.tenor.com/zGm5acSjHCIAAAAC/cat-cute.gif">
+<img class="sticker s2" src="https://media.tenor.com/1UjXKj1p8sUAAAAi/heart-love.gif">
+<img class="sticker s3" src="https://media.tenor.com/9RZ8Z1ZPzSIAAAAi/bear-love.gif">
+<img class="sticker s4" src="https://media.tenor.com/L0bK0c7s0o0AAAAi/cute-pixel.gif">
+
 <!-- MAIN WINDOW -->
 <div class="window" id="main">
   <div class="titlebar">
@@ -129,7 +157,7 @@
   </div>
 </div>
 
-<!-- FINAL ICONS -->
+<!-- FINAL -->
 <div class="window hidden" id="final">
   <div class="titlebar">
     <span>Digital Love</span>
@@ -156,7 +184,6 @@
     const yes = document.getElementById("yesBtn");
     const no = document.getElementById("noBtn");
 
-    // YES membesar & menutup NO
     yes.style.transform = `scale(${1 + noCount * 0.35})`;
     yes.style.left = "120px";
 
