@@ -3,37 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Love 🤍</title>
+<title>Digital Love 💗</title>
 
 <style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
+  }
+
   body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(#ffb6c1, #ffd1dc);
-    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #ffb6c1, #ffd1dc);
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .window {
-    background: #f5f5f5;
+    background: #f8f8f8;
     border: 4px solid #ff4fa3;
+    width: 320px;
     padding: 20px;
-    width: 300px;
     text-align: center;
+    animation: pop 0.45s ease;
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.85) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  h3 {
+    margin: 10px 0 20px;
   }
 
   .btn {
-    padding: 8px 18px;
-    margin: 10px;
+    padding: 8px 20px;
+    margin: 8px;
     border: 1px solid #555;
     background: #eee;
     cursor: pointer;
+    border-radius: 4px;
   }
 
-  .hidden { display: none; }
+  .btn:active {
+    transform: scale(0.95);
+  }
 
+  .hidden {
+    display: none;
+  }
+
+  /* loading bar */
   .bar {
     display: flex;
     justify-content: center;
@@ -41,82 +70,34 @@
   }
 
   .bar div {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     background: #ff4fa3;
-    margin: 2px;
+    margin: 3px;
     opacity: 0.2;
   }
 
+  /* icons */
   .icons {
     display: flex;
     justify-content: space-around;
-    margin-top: 15px;
+    margin-top: 20px;
   }
 
   .icons img {
-    width: 50px;
+    width: 52px;
     cursor: pointer;
-    transition: 0.2s;
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
   }
 
   .icons img:hover {
-    transform: scale(1.1);
-    /* smooth default */
-* {
-  transition: all 0.3s ease;
-}
-
-/* window animation */
-.window {
-  animation: pop 0.4s ease;
-}
-
-@keyframes pop {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* button effect */
-.btn {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn:active {
-  transform: scale(0.95);
-}
-
-.btn:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* loading bar pulse */
-.bar div {
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { opacity: 0.2; }
-}
-
-/* icons float */
-.icons img {
-  animation: float 2.5s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
+    transform: scale(1.15);
   }
 </style>
 </head>
@@ -128,17 +109,17 @@
   ❤️ Darling,<br><br>
   Will you open this?
   <br><br>
-  <button class="btn" onclick="next1()">Yes</button>
-  <button class="btn" onclick="next1()">No</button>
+  <button class="btn" onclick="go(2)">Yes</button>
+  <button class="btn" onclick="go(2)">No</button>
 </div>
 
 <!-- STEP 2 -->
 <div class="window hidden" id="step2">
-  ⚠️ OOPS ERROR!<br><br>
+  ⚠️ <b>OOPS ERROR!</b><br><br>
   Open it, please.
   <br><br>
-  <button class="btn" onclick="next2()">Start</button>
-  <button class="btn" onclick="next2()">Ignore</button>
+  <button class="btn" onclick="go(3)">Start</button>
+  <button class="btn" onclick="go(3)">Ignore</button>
 </div>
 
 <!-- STEP 3 -->
@@ -146,13 +127,13 @@
   😢 Are you sure about that?<br>
   Give me a chance.
   <br><br>
-  <button class="btn" onclick="next3()">Ok</button>
-  <button class="btn" onclick="next3()">No</button>
+  <button class="btn" onclick="go(4)">Ok</button>
+  <button class="btn" onclick="go(4)">No</button>
 </div>
 
 <!-- STEP 4 LOADING -->
-<div class="window hidden" id="loading">
-  TAP TO LOAD
+<div class="window hidden" id="step4">
+  <b>TAP TO LOAD</b>
   <div class="bar" id="bar">
     <div></div><div></div><div></div><div></div><div></div>
     <div></div><div></div><div></div><div></div><div></div>
@@ -160,8 +141,8 @@
   <button class="btn" onclick="load()">Load</button>
 </div>
 
-<!-- STEP 5 ICONS -->
-<div class="window hidden" id="final">
+<!-- STEP 5 FINAL -->
+<div class="window hidden" id="step5">
   💌 Choose one
   <div class="icons">
     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
@@ -177,28 +158,29 @@
 
 <script>
   function hideAll() {
-    document.querySelectorAll('.window').forEach(w => w.classList.add('hidden'));
+    document.querySelectorAll('.window')
+      .forEach(w => w.classList.add('hidden'));
   }
 
-  function next1(){ hideAll(); step2.classList.remove('hidden'); }
-  function next2(){ hideAll(); step3.classList.remove('hidden'); }
-  function next3(){ hideAll(); loading.classList.remove('hidden'); }
+  function go(step) {
+    hideAll();
+    document.getElementById('step' + step).classList.remove('hidden');
+  }
 
   function load() {
-    let blocks = document.querySelectorAll('.bar div');
+    const blocks = document.querySelectorAll('#bar div');
     let i = 0;
     let interval = setInterval(() => {
       blocks[i].style.opacity = 1;
       i++;
       if (i === blocks.length) {
         clearInterval(interval);
-        hideAll();
-        final.classList.remove('hidden');
+        go(5);
       }
-    }, 150);
+    }, 120);
   }
 
-  function openLink(url){
+  function openLink(url) {
     window.location.href = url;
   }
 </script>
