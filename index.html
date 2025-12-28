@@ -43,10 +43,6 @@
     align-items: center;
   }
 
-  .titlebar span {
-    font-weight: bold;
-  }
-
   .close {
     background: #c0c0c0;
     border: 1px solid #000;
@@ -54,7 +50,6 @@
     height: 18px;
     text-align: center;
     line-height: 16px;
-    cursor: pointer;
   }
 
   .content {
@@ -83,32 +78,17 @@
   }
 
   #yesBtn {
-    left: 40px;
+    left: 50px;
     z-index: 2;
   }
 
   #noBtn {
-    right: 40px;
+    right: 50px;
     z-index: 1;
   }
 
   .hidden {
     display: none;
-  }
-
-  /* loading */
-  .bar {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
-
-  .bar div {
-    width: 14px;
-    height: 14px;
-    background: #ff1493;
-    margin: 2px;
-    opacity: 0.2;
   }
 
   /* icons */
@@ -133,8 +113,8 @@
 
 <body>
 
-<!-- STEP 1 -->
-<div class="window" id="step1">
+<!-- MAIN WINDOW -->
+<div class="window" id="main">
   <div class="titlebar">
     <span>Message</span>
     <div class="close">X</div>
@@ -143,44 +123,13 @@
     ❤️ Darling,<br><br>
     Will you open this?
     <div class="buttons">
-      <button id="yesBtn" onclick="growYes()">Yes</button>
-      <button id="noBtn" onclick="growYes()">No</button>
+      <button id="yesBtn" onclick="yesClick()">Yes</button>
+      <button id="noBtn" onclick="noClick()">No</button>
     </div>
   </div>
 </div>
 
-<!-- STEP 2 -->
-<div class="window hidden" id="step2">
-  <div class="titlebar">
-    <span>Error</span>
-    <div class="close">X</div>
-  </div>
-  <div class="content">
-    ⚠️ OOPS ERROR!<br><br>
-    Open it, please.
-    <br><br>
-    <button onclick="next()">OK</button>
-  </div>
-</div>
-
-<!-- STEP 3 -->
-<div class="window hidden" id="step3">
-  <div class="titlebar">
-    <span>Loading</span>
-    <div class="close">X</div>
-  </div>
-  <div class="content">
-    Tap to load
-    <div class="bar" id="bar">
-      <div></div><div></div><div></div><div></div><div></div>
-      <div></div><div></div><div></div><div></div><div></div>
-    </div>
-    <br>
-    <button onclick="load()">Load</button>
-  </div>
-</div>
-
-<!-- FINAL -->
+<!-- FINAL ICONS -->
 <div class="window hidden" id="final">
   <div class="titlebar">
     <span>Digital Love</span>
@@ -200,46 +149,25 @@
 </div>
 
 <script>
-  let clicks = 0;
+  let noCount = 0;
 
-  function growYes() {
-    clicks++;
+  function noClick() {
+    noCount++;
     const yes = document.getElementById("yesBtn");
     const no = document.getElementById("noBtn");
 
-    // YES membesar & bergerak ke tengah
-    yes.style.transform = `scale(${1 + clicks * 0.3})`;
+    // YES membesar & menutup NO
+    yes.style.transform = `scale(${1 + noCount * 0.35})`;
     yes.style.left = "120px";
 
-    // NO makin tertutup
-    if (clicks >= 3) {
+    if (noCount >= 3) {
       no.style.opacity = "0";
     }
-
-    // klik ke-4 terus next
-    if (clicks >= 4) {
-      document.getElementById("step1").classList.add("hidden");
-      document.getElementById("step2").classList.remove("hidden");
-    }
   }
 
-  function next() {
-    document.getElementById("step2").classList.add("hidden");
-    document.getElementById("step3").classList.remove("hidden");
-  }
-
-  function load() {
-    const blocks = document.querySelectorAll("#bar div");
-    let i = 0;
-    let interval = setInterval(() => {
-      blocks[i].style.opacity = 1;
-      i++;
-      if (i === blocks.length) {
-        clearInterval(interval);
-        document.getElementById("step3").classList.add("hidden");
-        document.getElementById("final").classList.remove("hidden");
-      }
-    }, 120);
+  function yesClick() {
+    document.getElementById("main").classList.add("hidden");
+    document.getElementById("final").classList.remove("hidden");
   }
 
   function openLink(url) {
